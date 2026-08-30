@@ -21,7 +21,7 @@
         <div class="brand-mark"><img src="icon-96.png" alt="Media Studio icon" /></div>
         <div>
           <div class="brand">Media Studio</div>
-          <div class="subbrand">Revision 2 • Professional photo & video media editor</div>
+          <div class="subbrand">Revision 3 • Live photo & video media editor</div>
         </div>
       </div>
       <button id="newProjectBtn" class="ghost">+ Project</button>
@@ -109,6 +109,27 @@
               <h3>Select a photo or video</h3>
               <p>Your media will appear here with non-destructive editing controls.</p>
             </div>
+
+            <div id="quickEdit" class="quick-edit">
+              <div class="quick-edit-head">
+                <strong>Live Edit</strong>
+                <span class="muted">Choose an adjustment and watch the image update above.</span>
+              </div>
+              <div class="edit-category-tabs" role="tablist" aria-label="Edit categories">
+                <button class="edit-category active" data-category="light">Light</button>
+                <button class="edit-category" data-category="color">Color</button>
+                <button class="edit-category" data-category="detail">Detail</button>
+              </div>
+              <div id="quickAdjustments" class="quick-adjustments"></div>
+              <div class="live-slider-wrap">
+                <div class="live-slider-label">
+                  <span id="liveSliderName">Brightness</span>
+                  <output id="liveSliderValue">0</output>
+                </div>
+                <input id="liveSlider" class="live-slider" type="range" min="-100" max="100" value="0" aria-label="Live adjustment slider" />
+                <div class="slider-scale"><span>-</span><span>0</span><span>+</span></div>
+              </div>
+            </div>
           </section>
 
           <aside class="controls-panel panel">
@@ -133,7 +154,7 @@
 
             <div class="control-group">
               <h4>Light</h4>
-              <label><span>Exposure</span><output id="exposureOut">0</output></label>
+              <label><span>Brightness</span><output id="exposureOut">0</output></label>
               <input id="exposure" type="range" min="-100" max="100" value="0" />
               <label><span>Contrast</span><output id="contrastOut">0</output></label>
               <input id="contrast" type="range" min="-100" max="100" value="0" />
@@ -147,6 +168,8 @@
               <h4>Color</h4>
               <label><span>Temperature</span><output id="temperatureOut">0</output></label>
               <input id="temperature" type="range" min="-100" max="100" value="0" />
+              <label><span>Tint / Color Balance</span><output id="tintOut">0</output></label>
+              <input id="tint" type="range" min="-100" max="100" value="0" />
               <label><span>Saturation</span><output id="saturationOut">0</output></label>
               <input id="saturation" type="range" min="-100" max="100" value="0" />
               <label><span>Vibrance</span><output id="vibranceOut">0</output></label>

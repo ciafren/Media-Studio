@@ -1,8 +1,8 @@
-# Media Studio — Revision 2
+# Media Studio — Revision 3
 
 Standalone GitHub/Vercel-ready professional photo and video media editor.
 
-## Revision 2 changes
+## Revision 3 changes
 
 - Removed all N&J Stone / NJ Stone branding.
 - Product is now named **Media Studio** as its own standalone entity.
@@ -56,4 +56,14 @@ When the deployed site is opened in Safari and added to the Home Screen, iOS wil
 
 ## Storage note
 
-Revision 2 stores projects and media locally in the browser with IndexedDB. Clearing browser/site data or changing devices can remove locally stored projects. Cloud backup/sync is not yet included.
+Revision 3 stores projects and media locally in the browser with IndexedDB. Clearing browser/site data or changing devices can remove locally stored projects. Cloud backup/sync is not yet included.
+
+
+## Revision 3 changes
+- Fixed image viewer clipping/cut-off behavior.
+- Full image is fit inside the live preview while preserving aspect ratio.
+- Added sticky mobile live-edit workspace so the photo remains visible while editing.
+- Added large precision slider optimized for iPhone touch control.
+- Added Light / Color / Detail edit categories.
+- Added Brightness, Contrast, Highlights, Shadows, Temperature, Tint / Color Balance, Saturation, Vibrance, Clarity, Sharpness, and Vignette quick controls.
+- Larger sliders in the full controls panel.
