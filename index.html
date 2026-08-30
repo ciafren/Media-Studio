@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0d0f12" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Media Studio</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="appShell">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <div class="brand-mark"><img src="icon-96.png" alt="Media Studio icon" /></div>
+        <div>
+          <div class="brand">Media Studio</div>
+          <div class="subbrand">Revision 2 • Professional photo & video media editor</div>
+        </div>
+      </div>
+      <button id="newProjectBtn" class="ghost">+ Project</button>
+    </header>
+
+    <main>
+      <section id="projectScreen" class="screen active">
+        <div class="hero-card">
+          <div>
+            <span class="eyebrow">PROFESSIONAL PROPERTY MEDIA</span>
+            <h1>Make indoor & outdoor job photos look publication-ready.</h1>
+            <p>Upload photos or videos, apply professional presets, fine-tune the look, compare before/after, batch-apply settings, and export full-resolution images.</p>
+          </div>
+          <label class="primary upload-hero">
+            Upload media
+            <input id="heroUpload" type="file" accept="image/*,video/*" multiple hidden />
+          </label>
+        </div>
+
+        <div class="section-head">
+          <h2>Projects</h2>
+          <span id="projectCount" class="muted"></span>
+        </div>
+        <div id="projectGrid" class="project-grid"></div>
+        <div id="emptyProjects" class="empty-card">
+          <div class="empty-icon">✦</div>
+          <h3>No projects yet</h3>
+          <p>Create a project, then add kitchen, countertop, fireplace, bathroom, exterior, or walkthrough media.</p>
+          <button id="emptyNewProjectBtn" class="primary">Create first project</button>
+        </div>
+      </section>
+
+      <section id="studioScreen" class="screen">
+        <div class="studio-head">
+          <button id="backBtn" class="ghost">← Projects</button>
+          <div class="project-title-wrap">
+            <input id="projectTitle" class="project-title" value="Untitled Project" aria-label="Project title" />
+            <div id="projectMeta" class="muted"></div>
+          </div>
+          <label class="primary compact">
+            + Media
+            <input id="mediaUpload" type="file" accept="image/*,video/*" multiple hidden />
+          </label>
+        </div>
+
+        <div class="studio-layout">
+          <aside class="media-panel panel">
+            <div class="panel-title-row">
+              <h3>Media</h3>
+              <button id="selectAllBtn" class="text-btn">Select all</button>
+            </div>
+            <div id="mediaList" class="media-list"></div>
+            <div id="mediaEmpty" class="mini-empty">Upload photos or video clips to begin.</div>
+          </aside>
+
+          <section class="viewer-panel panel">
+            <div class="viewer-toolbar">
+              <div class="segmented">
+                <button id="compareBtn" class="segment active">Before / After</button>
+                <button id="editedBtn" class="segment">Edited</button>
+                <button id="originalBtn" class="segment">Original</button>
+              </div>
+              <div class="toolbar-actions">
+                <button id="autoBtn" class="ghost compact">✨ Auto Enhance</button>
+                <button id="exportBtn" class="primary compact">Export</button>
+              </div>
+            </div>
+
+            <div id="imageViewer" class="viewer-stage hidden">
+              <canvas id="originalCanvas"></canvas>
+              <div id="editedClip" class="edited-clip"><canvas id="editedCanvas"></canvas></div>
+              <div id="compareLine" class="compare-line"><span></span></div>
+              <input id="compareRange" class="compare-range" type="range" min="0" max="100" value="50" aria-label="Before and after slider" />
+              <div class="badge before-badge">BEFORE</div>
+              <div class="badge after-badge">AFTER</div>
+            </div>
+
+            <div id="videoViewer" class="viewer-stage video-stage hidden">
+              <video id="videoPlayer" controls playsinline></video>
+              <div class="video-note">Video organization + live preset preview are included. Processed video export will be added in a future revision.</div>
+            </div>
+
+            <div id="viewerEmpty" class="viewer-empty">
+              <div class="empty-icon">▣</div>
+              <h3>Select a photo or video</h3>
+              <p>Your media will appear here with non-destructive editing controls.</p>
+            </div>
+          </section>
+
+          <aside class="controls-panel panel">
+            <div class="panel-title-row">
+              <h3>Looks</h3>
+              <button id="resetBtn" class="text-btn">Reset</button>
+            </div>
+
+            <div class="preset-grid" id="presetGrid">
+              <button data-preset="auto" class="preset active">Auto</button>
+              <button data-preset="luxury" class="preset">Luxury Interior</button>
+              <button data-preset="bright" class="preset">Bright Real Estate</button>
+              <button data-preset="stone" class="preset">Natural Stone</button>
+              <button data-preset="exterior" class="preset">Exterior</button>
+              <button data-preset="cinematic" class="preset">Cinematic</button>
+            </div>
+
+            <div class="strength-wrap">
+              <label><span>Preset strength</span><output id="strengthOut">70%</output></label>
+              <input id="strength" type="range" min="0" max="100" value="70" />
+            </div>
+
+            <div class="control-group">
+              <h4>Light</h4>
+              <label><span>Exposure</span><output id="exposureOut">0</output></label>
+              <input id="exposure" type="range" min="-100" max="100" value="0" />
+              <label><span>Contrast</span><output id="contrastOut">0</output></label>
+              <input id="contrast" type="range" min="-100" max="100" value="0" />
+              <label><span>Highlights</span><output id="highlightsOut">0</output></label>
+              <input id="highlights" type="range" min="-100" max="100" value="0" />
+              <label><span>Shadows</span><output id="shadowsOut">0</output></label>
+              <input id="shadows" type="range" min="-100" max="100" value="0" />
+            </div>
+
+            <div class="control-group">
+              <h4>Color</h4>
+              <label><span>Temperature</span><output id="temperatureOut">0</output></label>
+              <input id="temperature" type="range" min="-100" max="100" value="0" />
+              <label><span>Saturation</span><output id="saturationOut">0</output></label>
+              <input id="saturation" type="range" min="-100" max="100" value="0" />
+              <label><span>Vibrance</span><output id="vibranceOut">0</output></label>
+              <input id="vibrance" type="range" min="-100" max="100" value="0" />
+            </div>
+
+            <div class="control-group">
+              <h4>Detail</h4>
+              <label><span>Clarity</span><output id="clarityOut">0</output></label>
+              <input id="clarity" type="range" min="-100" max="100" value="0" />
+              <label><span>Sharpness</span><output id="sharpnessOut">0</output></label>
+              <input id="sharpness" type="range" min="0" max="100" value="0" />
+              <label><span>Vignette</span><output id="vignetteOut">0</output></label>
+              <input id="vignette" type="range" min="0" max="100" value="0" />
+            </div>
+
+            <div class="batch-box">
+              <strong>Batch workflow</strong>
+              <p>Apply the current look to every selected photo in this project.</p>
+              <button id="applySelectedBtn" class="secondary">Apply to selected</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <dialog id="projectDialog">
+      <form method="dialog" id="projectForm">
+        <h2>New project</h2>
+        <label>Project name<input id="newProjectName" required placeholder="e.g. River Oaks Kitchen" /></label>
+        <label>Client / location<input id="newProjectLocation" placeholder="Optional" /></label>
+        <div class="dialog-actions">
+          <button value="cancel" class="ghost">Cancel</button>
+          <button id="createProjectConfirm" value="default" class="primary">Create</button>
+        </div>
+      </form>
+    </dialog>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
