@@ -21,10 +21,13 @@
         <div class="brand-mark"><img src="icon-96.png" alt="Media Studio icon" /></div>
         <div>
           <div class="brand">Media Studio</div>
-          <div class="subbrand">Revision 3 • Live photo & video media editor</div>
+          <div class="subbrand">Revision 6 • All-in-one photo & video studio</div>
         </div>
       </div>
-      <button id="newProjectBtn" class="ghost">+ Project</button>
+      <div class="top-actions">
+        <button id="libraryBtn" class="ghost">Media</button>
+        <button id="newProjectBtn" class="ghost">+ Project</button>
+      </div>
     </header>
 
     <main>
@@ -32,8 +35,8 @@
         <div class="hero-card">
           <div>
             <span class="eyebrow">PROFESSIONAL PROPERTY MEDIA</span>
-            <h1>Make indoor & outdoor job photos look publication-ready.</h1>
-            <p>Upload photos or videos, apply professional presets, fine-tune the look, compare before/after, batch-apply settings, and export full-resolution images.</p>
+            <h1>Create polished photos and videos from one studio.</h1>
+            <p>Import photos and video clips, auto-enhance them, fine-tune every look, build a clip timeline, trim and reorder video, manage originals and edits, and export production-ready media.</p>
           </div>
           <label class="primary upload-hero">
             Upload media
@@ -51,6 +54,39 @@
           <h3>No projects yet</h3>
           <p>Create a project, then add kitchen, countertop, fireplace, bathroom, exterior, or walkthrough media.</p>
           <button id="emptyNewProjectBtn" class="primary">Create first project</button>
+        </div>
+      </section>
+
+
+      <section id="libraryScreen" class="screen">
+        <div class="library-head">
+          <div>
+            <span class="eyebrow">MEDIA LIBRARY</span>
+            <h1>Originals & Edits</h1>
+            <p class="muted">Every imported photo remains available as an original. Your latest edited version is saved alongside it for quick review and export.</p>
+          </div>
+          <div class="library-stats">
+            <div><strong id="libraryOriginalCount">0</strong><span>Originals</span></div>
+            <div><strong id="libraryEditedCount">0</strong><span>Edited</span></div>
+          </div>
+        </div>
+
+        <div class="library-toolbar panel">
+          <div class="segmented library-tabs">
+            <button class="segment active" data-library-filter="all">All</button>
+            <button class="segment" data-library-filter="original">Originals</button>
+            <button class="segment" data-library-filter="edited">Edited</button>
+          </div>
+          <select id="libraryProjectFilter" class="library-select" aria-label="Filter media by project">
+            <option value="all">All projects</option>
+          </select>
+        </div>
+
+        <div id="libraryGrid" class="library-grid"></div>
+        <div id="libraryEmpty" class="empty-card">
+          <div class="empty-icon">▣</div>
+          <h3>No media saved yet</h3>
+          <p>Import media into a project. Originals appear here automatically, and edited versions appear as soon as you make an adjustment.</p>
         </div>
       </section>
 
@@ -86,6 +122,7 @@
               </div>
               <div class="toolbar-actions">
                 <button id="autoBtn" class="ghost compact">✨ Auto Enhance</button>
+                <button id="saveEditBtn" class="ghost compact">Save Edit</button>
                 <button id="exportBtn" class="primary compact">Export</button>
               </div>
             </div>
@@ -100,9 +137,40 @@
             </div>
 
             <div id="videoViewer" class="viewer-stage video-stage hidden">
-              <video id="videoPlayer" controls playsinline></video>
-              <div class="video-note">Video organization + live preset preview are included. Processed video export will be added in a future revision.</div>
+              <div class="video-frame" id="videoFrame">
+                <video id="videoPlayer" controls playsinline></video>
+                <div id="videoTextOverlay" class="video-text-overlay hidden"></div>
+              </div>
             </div>
+
+            <section id="videoWorkbench" class="video-workbench hidden" aria-label="Video editing workbench">
+              <div class="video-workbench-head">
+                <div>
+                  <strong>Video Studio</strong>
+                  <span>Auto-enhance or fine-tune each clip, then trim, reorder and save the edit.</span>
+                </div>
+                <div class="video-head-actions">
+                  <button id="autoMatchBtn" class="ghost compact">Auto Match Clips</button>
+                  <button id="videoExportBtn" class="primary compact">Export Video</button>
+                </div>
+              </div>
+
+              <div class="video-timeline-shell">
+                <div class="timeline-label-row"><span>Project Timeline</span><small id="timelineSummary">0 clips</small></div>
+                <div id="videoTimeline" class="video-timeline"></div>
+              </div>
+
+              <div class="video-tool-tabs" role="tablist" aria-label="Video tools">
+                <button class="video-tool-tab active" data-video-tool="adjust">Adjust</button>
+                <button class="video-tool-tab" data-video-tool="trim">Trim</button>
+                <button class="video-tool-tab" data-video-tool="speed">Speed</button>
+                <button class="video-tool-tab" data-video-tool="audio">Audio</button>
+                <button class="video-tool-tab" data-video-tool="format">Format</button>
+                <button class="video-tool-tab" data-video-tool="text">Text</button>
+              </div>
+
+              <div id="videoToolPanel" class="video-tool-panel"></div>
+            </section>
 
             <div id="viewerEmpty" class="viewer-empty">
               <div class="empty-icon">▣</div>
@@ -188,13 +256,18 @@
 
             <div class="batch-box">
               <strong>Batch workflow</strong>
-              <p>Apply the current look to every selected photo in this project.</p>
-              <button id="applySelectedBtn" class="secondary">Apply to selected</button>
+              <p>Apply the current look to every selected photo or video in this project.</p>
+              <button id="applySelectedBtn" class="secondary">Apply look to selected</button>
             </div>
           </aside>
         </div>
       </section>
     </main>
+
+    <nav class="mobile-nav" aria-label="Main navigation">
+      <button id="mobileProjectsBtn" class="mobile-nav-item active"><span>▦</span><small>Projects</small></button>
+      <button id="mobileLibraryBtn" class="mobile-nav-item"><span>▣</span><small>Media</small></button>
+    </nav>
 
     <div id="toast" class="toast"></div>
 

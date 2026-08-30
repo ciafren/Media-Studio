@@ -1,4 +1,4 @@
-const CACHE='media-studio-r2';
+const CACHE='media-studio-r6';
 const ASSETS=[
   './','./index.html','./styles.css','./app.js','./manifest.webmanifest',
   './favicon.ico','./favicon-32x32.png','./favicon-16x16.png','./apple-touch-icon.png',

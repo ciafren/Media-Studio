@@ -1,69 +1,96 @@
-# Media Studio — Revision 3
+# Media Studio — Revision 6
 
-Standalone GitHub/Vercel-ready professional photo and video media editor.
+Standalone GitHub/Vercel-ready all-in-one **photo + video media studio**.
 
-## Revision 3 changes
+Revision 6 moves Media Studio beyond a photo enhancer and turns video into a first-class editing workflow. The goal is a simpler, project-focused alternative to a CapCut-style workflow for interiors, exteriors, stone, construction, real-estate and social-media content.
 
-- Removed all N&J Stone / NJ Stone branding.
-- Product is now named **Media Studio** as its own standalone entity.
-- Added the approved black-and-gold camera-lens identity throughout the app.
-- Added production-ready web/PWA/iOS icon assets.
-- Added favicon support and Apple Home Screen icon support.
-- Updated PWA manifest and service-worker cache.
-- Updated export filenames to use `_MediaStudio.jpg`.
+## What is new in Revision 6
+
+### Unified photo + video workflow
+- Photos and videos live inside the same project and the same **Original / Edited** Media library.
+- All edits are non-destructive: the imported original is preserved.
+- **Auto Enhance** is optional and every result can be manually overridden.
+- Existing professional looks remain available: Auto, Luxury Interior, Bright Interior, Natural Stone, Exterior and Cinematic.
+- Natural Stone is designed as the conservative preset for marble, granite, quartzite and quartz so color and veining remain realistic.
+
+### New Video Studio
+- Dedicated live video preview.
+- Project video timeline with clip selection.
+- Reorder clips left/right.
+- Trim In / Trim Out controls.
+- Set trim points directly from the current playhead.
+- Split a clip at the playhead into two virtual clips.
+- Playback speed: 0.25x through 2x.
+- Clip volume / mute control.
+- Per-clip transition metadata: None, Fade, Dissolve, Dip to black.
+- Aspect ratio preview: Original, 9:16, 16:9, 1:1 and 4:5.
+- Output target: Source, 1080p or 4K.
+- Frame rate target: 24, 30 or 60 fps.
+- Text overlay with live preview and adjustable text size.
+- **Auto Match Clips** copies the current visual treatment to selected project video clips for a consistent walkthrough/reel look.
+
+### Video Auto Enhance + manual control
+- Auto Enhance samples the current video frame and selects a useful starting look.
+- Manual Light, Color and Detail controls continue to work on video previews in real time.
+- Brightness, Contrast, Highlights, Shadows, Temperature, Tint, Saturation, Vibrance, Clarity, Sharpness and Vignette remain non-destructive.
+
+### Browser-rendered video export
+- Revision 6 includes a best-effort processed video renderer using browser-native Canvas + MediaRecorder when supported.
+- It attempts to render the selected trim, speed, color treatment, aspect ratio, text overlay, resolution and frame rate.
+- The edited render is saved into the Media library when the browser successfully creates it.
+- Browser codec/container support differs by iPhone/iOS/Safari version. If processed rendering is unavailable, Media Studio keeps the original and all edit settings rather than damaging or replacing the source.
+- Long-form 4K rendering, stabilization, advanced noise reduction, multi-clip final assembly, music/voiceover mixing and AI object removal are better suited to the planned processing backend.
+
+## Existing photo workflow retained
+- Full-image aspect-fit preview on iPhone.
+- Before / After, Edited and Original views.
+- Large touch-friendly live adjustment slider.
+- Light / Color / Detail quick-edit categories while the photo stays visible.
+- Batch looks.
+- Full-resolution JPG export.
+- Media library with Original and Edited entries.
+
+## Media Library
+- Dedicated **Media** section.
+- Filters: All / Originals / Edited.
+- Project filter.
+- Original downloads.
+- Edited photo exports.
+- Edited video render download when a browser render has been successfully created.
 
 ## Included icon assets
+The selected black-and-gold Media Studio camera-lens artwork remains the official identity.
 
-- `icon-1024.png` — master / App Store source artwork
-- `icon-512.png` — PWA / high-resolution web icon
-- `icon-384.png`
-- `icon-256.png`
-- `icon-192.png` — Android/PWA icon
-- `icon-180.png` and `apple-touch-icon.png` — iPhone/iPad Home Screen
+- `icon-1024.png` — master / App Store artwork
+- `icon-512.png` — PWA / high-resolution web
+- `icon-384.png`, `icon-256.png`, `icon-192.png`
+- `icon-180.png` / `apple-touch-icon.png`
 - `icon-167.png`, `icon-152.png`, `icon-144.png`, `icon-128.png`, `icon-120.png`
 - `icon-96.png`, `icon-64.png`, `icon-48.png`
 - `favicon-32x32.png`, `favicon-16x16.png`, `favicon.ico`
 
-All files are placed directly in the repository root so they can be uploaded straight to the GitHub **main** branch.
-
 ## GitHub + Vercel
+All files are intentionally placed directly at the repository root for the normal main-branch workflow.
 
-1. Create or open the Media Studio GitHub repository.
-2. Make sure you are on the `main` branch.
-3. Upload every file from this folder directly to the repository root.
-4. Commit the changes to `main`.
-5. In Vercel, import the GitHub repository or redeploy the existing project.
-6. No build command is required.
-7. Framework preset can remain **Other**.
+1. Extract the Revision 6 ZIP.
+2. Open the Media Studio GitHub repository and switch to `main`.
+3. Replace/upload every file from the ZIP directly in the repository root.
+4. Commit the changes.
+5. Vercel will redeploy the connected repository automatically.
+6. No build command is required; Framework Preset may remain **Other**.
 
-## iPhone Home Screen
+## iPhone update note
+Revision 6 uses a new service-worker cache. After Vercel finishes deploying, close the old Safari tab and reopen the deployed site. If an installed Home Screen version still shows Revision 5, remove the Home Screen shortcut and add it again after opening the new deployment in Safari.
 
-When the deployed site is opened in Safari and added to the Home Screen, iOS will use `apple-touch-icon.png`.
+## Local storage note
+Projects, originals, edit settings and saved edited media are currently stored in browser IndexedDB. Clearing site data or moving to another device can remove locally stored projects. Cloud backup/sync is still a planned backend feature.
 
-## Current functionality
-
-- iPhone-first responsive interface
-- Project-based photo/video organization
-- Multi-file upload
-- Non-destructive photo editing
-- Before/after comparison
-- Auto Enhance
-- Luxury Interior, Bright Real Estate, Natural Stone, Exterior, and Cinematic presets
-- Exposure, contrast, highlights, shadows, temperature, saturation, vibrance, clarity, sharpness, and vignette controls
-- Batch apply to selected photos
-- Full-resolution JPG export
-- Video organization and live preset preview
-
-## Storage note
-
-Revision 3 stores projects and media locally in the browser with IndexedDB. Clearing browser/site data or changing devices can remove locally stored projects. Cloud backup/sync is not yet included.
-
-
-## Revision 3 changes
-- Fixed image viewer clipping/cut-off behavior.
-- Full image is fit inside the live preview while preserving aspect ratio.
-- Added sticky mobile live-edit workspace so the photo remains visible while editing.
-- Added large precision slider optimized for iPhone touch control.
-- Added Light / Color / Detail edit categories.
-- Added Brightness, Contrast, Highlights, Shadows, Temperature, Tint / Color Balance, Saturation, Vibrance, Clarity, Sharpness, and Vignette quick controls.
-- Larger sliders in the full controls panel.
+## Planned backend-enabled upgrades
+- Reliable multi-clip final timeline rendering.
+- Stabilization.
+- Advanced noise reduction and sharpening.
+- AI sky / object / construction-debris removal.
+- Music library and voiceover.
+- Audio ducking and mixing.
+- Auto Reel / 15s / 30s / 60s assembly.
+- Cloud project sync and cross-device backup.
