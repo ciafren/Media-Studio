@@ -1,0 +1,2 @@
+import { useStudio } from './useStudio';
+export function Timeline(){const s=useStudio();return <div className="timelineWrap"><div className="ruler"><span>{s.playhead.toFixed(1)}s</span><div className="playhead"></div></div><div className="timeline">{s.project.clips.map((c,i)=><button key={c.id} onClick={()=>s.selectClip(c.id)} className={'clip '+(c.id===s.selectedClipId?'selected':'')} style={{width:Math.max(84,c.duration*28)}}><b>{i+1}</b><span>{c.name}</span><small>{c.duration.toFixed(1)}s</small></button>)}</div></div>}
